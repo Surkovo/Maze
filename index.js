@@ -1,3 +1,5 @@
+
+
 const { Engine, 
         Render, 
         Runner, 
@@ -9,8 +11,8 @@ const { Engine,
 
 const width = window.innerWidth;
 const height = window.innerHeight;
-const cellsH = 4;
-const cellsV = 3;
+const cellsH = 25;
+const cellsV = 20;
 const unitLengthX = width / cellsH; 
 const unitLengthY = height / cellsV;
 
@@ -137,7 +139,7 @@ horizontals.forEach((row, rowIndex)=>{
                 label: 'wall',
                 isStatic: true,
                 render: {
-                    fillStyle: 'red'
+                    fillStyle: '#d6db74'
                 }
             } 
          );
@@ -159,7 +161,7 @@ verticals.forEach((row, rowIndex) => {
                 label: 'wall',
                 isStatic: true,
                 render: {
-                    fillStyle: 'red'
+                    fillStyle: '#d6db74'
                 }
             } 
         );
@@ -177,7 +179,7 @@ const goal = Bodies.rectangle(
         label: 'goal',
         isStatic: true,
         render: {
-            fillStyle: "green"
+            fillStyle: "#58edd7"
         }
     } 
 );
@@ -194,7 +196,7 @@ const ball = Bodies.circle(
     {
         label: 'ball',
         render: {
-            fillStyle: 'blue'
+            fillStyle: '#c587e0'
         }
     }
 );
@@ -231,3 +233,7 @@ Events.on(engine, 'collisionStart', event => {
         }
     });
 });
+
+alert("Use WASD to move the ball to the bottom right goal to win!");
+
+
