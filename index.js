@@ -1,5 +1,4 @@
 
-
 const { Engine, 
         Render, 
         Runner, 
@@ -216,13 +215,43 @@ document.addEventListener('keydown', event => {
     } 
 });
 
+let [ms, s, m]  = [0,0,0];
+let timer;
+function run(){
+    score.textContent = getTimer();
+    ms++; 
+    if(ms == 100){
+        ms = 0;
+        s++;
+    }
+    if(s == 60){
+        s = 0;
+        m++;
+    }
+}
+function start() {  
+    timer = setInterval(run , 10);
+}
+
+function pause (){
+    clearInterval(timer);
+    timer = false;
+}
+function getTimer(){
+    return `${m}m:${s}s:${ms}ms`;
+}
+
 // Win condition
+const score = document.querySelector('.score');
 
 Events.on(engine, 'collisionStart', event => {
     event.pairs.forEach((collision)=>{
         const labels = ['ball', 'goal'];
         if(labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)){
+            pause();
+            //score.value = getTimer();
             document.querySelector('.winner').classList.remove('hidden');
+            score.classList.remove('hidden');
             world.gravity.y = 1;
             world.bodies.forEach(body => {
                 if(body.label === 'wall') {
@@ -235,5 +264,4 @@ Events.on(engine, 'collisionStart', event => {
 });
 
 alert("Use WASD to move the ball to the bottom right goal to win!");
-
-
+start();
